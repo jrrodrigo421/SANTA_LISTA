@@ -34,51 +34,65 @@ class _AddContactScreenState extends State<AddContactScreen> {
       backgroundColor: const Color(0xFFFFF8C2),
       appBar: AppBar(
         title: const Text('Adicionar Contato',
-            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+            style: TextStyle(
+                color: Colors.black,
+                fontSize: 22,
+                fontWeight: FontWeight.bold)),
         backgroundColor: const Color(0xFFFFD700),
+        elevation: 6,
+        shadowColor: Colors.black54,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: const LinearGradient(
+            colors: [Color(0xFFFFF8C2), Color(0xFFFFE680)],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        padding: const EdgeInsets.all(20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextField(
-              controller: _nameController,
-              decoration: const InputDecoration(
-                labelText: 'Nome',
-                labelStyle:
-                    TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-                border: OutlineInputBorder(),
-              ),
-            ),
+            _buildInputField(_nameController, 'Nome', Icons.person),
             const SizedBox(height: 16),
-            TextField(
-              controller: _phoneController,
-              keyboardType: TextInputType.phone,
-              decoration: const InputDecoration(
-                labelText: 'Telefone',
-                labelStyle:
-                    TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-                border: OutlineInputBorder(),
-              ),
-            ),
-            const SizedBox(height: 20),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: _saveContact,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF0047AB),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8)),
+            _buildInputField(
+                _phoneController, 'Telefone', Icons.phone, TextInputType.phone),
+            const SizedBox(height: 24),
+            ElevatedButton.icon(
+              onPressed: _saveContact,
+              icon: const Icon(Icons.save, color: Colors.white),
+              label: const Text('Salvar',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF0047AB),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
                 ),
-                child: const Text('Salvar',
-                    style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold)),
+                padding: const EdgeInsets.symmetric(vertical: 14),
               ),
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildInputField(
+      TextEditingController controller, String label, IconData icon,
+      [TextInputType keyboardType = TextInputType.text]) {
+    return TextField(
+      controller: controller,
+      keyboardType: keyboardType,
+      decoration: InputDecoration(
+        prefixIcon: Icon(icon, color: const Color(0xFF0047AB)),
+        labelText: label,
+        labelStyle: const TextStyle(
+            fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
+        filled: true,
+        fillColor: Colors.white,
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
       ),
     );
   }

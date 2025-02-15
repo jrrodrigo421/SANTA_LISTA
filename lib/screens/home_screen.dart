@@ -96,10 +96,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           color: Colors.black87,
                         ),
                       ),
-                      trailing: IconButton(
-                        icon: const Icon(Icons.delete, color: Colors.red),
-                        onPressed: () => _deleteContact(contact.id),
-                      ),
+                      // trailing: IconButton(
+                      //   icon: const Icon(Icons.delete, color: Colors.red),
+                      //   onPressed: () => _deleteContact(contact.id),
+                      // ),
                     ),
                   ),
                 );
